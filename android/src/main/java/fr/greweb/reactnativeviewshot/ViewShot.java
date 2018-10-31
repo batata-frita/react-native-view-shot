@@ -444,9 +444,6 @@ public class ViewShot implements UIBlock {
      * Return bitmap to set of available.
      */
     private static void recycleBitmap(@NonNull final Bitmap bitmap) {
-        synchronized (guardBitmaps) {
-            weakBitmaps.add(bitmap);
-        }
     }
 
     /**
@@ -454,16 +451,6 @@ public class ViewShot implements UIBlock {
      */
     @NonNull
     private static Bitmap getBitmapForScreenshot(final int width, final int height) {
-        synchronized (guardBitmaps) {
-            for (final Bitmap bmp : weakBitmaps) {
-                if (bmp.getWidth() * bmp.getHeight() <= width * height) {
-                    weakBitmaps.remove(bmp);
-                    bmp.eraseColor(Color.TRANSPARENT);
-                    return bmp;
-                }
-            }
-        }
-
         return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
     }
     //endregion
