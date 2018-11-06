@@ -473,6 +473,7 @@ public class ViewShot implements UIBlock {
      */
     @NonNull
     private static Bitmap getBitmapForScreenshot(final int width, final int height) {
+        return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
     }
 
     /**
